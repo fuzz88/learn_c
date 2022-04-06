@@ -10,13 +10,13 @@
 char * substr(char * s, int start, int end)
 {	
 	char* result;
-	result = (char*) malloc(end - start + 1);
+	result = (char*) malloc(end - start + 2);
 	
 	for (int i = start; i <= end; i++)
 	{
 		result[i - start] = s[i];
 	}
-	result[end + 1] = '\0';
+	result[end - start + 1] = '\0';
 	
 	return result;
 	
