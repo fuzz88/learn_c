@@ -2,7 +2,7 @@
 #include <string.h>
 
 
-/* romanDigit converts single roman digit to decimal numeral */
+/* romanDigit converts single roman digi1t to decimal numeral */
 int romanDigit(char digit)
 {
 	switch (digit)
@@ -34,66 +34,21 @@ int romanToInt(char * s)
 
 	printf("%s\n", s);
 	length = strlen(s);
-	for (int i = length - 1; i != -1; i--)
-	{	
-		sum += romanDigit(s[i]);
-		if (i - 1 > 0)
+	for (int i = 0; i < length; i++)
+	{
+		if (romanDigit(s[i]) >= romanDigit(s[i+1]))
 		{
-			switch (s[i]) 
-			{
-				case 'M':
-					switch (s[i-1])
-					{
-						case 'C':
-							sum -= romanDigit('C');
-							i -= 1;
-							break;
-					}
-				case 'D':
-					switch (s[i-1])
-					{
-						case 'C':
-							sum -= romanDigit('C');
-							i -= 1;
-							break;
-					}
-				case 'C':
-					switch (s[i-1])
-					{
-						case 'X':
-							sum -= romanDigit('X');
-							i -= 1;
-							break;
-					}
-				case 'L':
-					switch (s[i-1])
-					{
-						case 'X':
-							sum -= romanDigit('X');
-							i -= 1;
-							break;
-					}
-				case 'X':
-					switch (s[i-1])
-					{
-						case 'I':
-							sum -= romanDigit('I');
-							i -= 1;
-							break;
-					}
-				case 'V':
-					switch (s[i-1])
-					{
-						case 'I':
-							sum -= romanDigit('I');
-							i -= 1;
-							break;
-					}
-				}
-			}
+			sum += romanDigit(s[i]);
+			
 		}
+		else
+		{	sum += romanDigit(s[i+1]) - romanDigit(s[i]);
+			i++;
+		}  
+	}
 	return sum;
-}
+}	
+
 
 int main(void)
 {	
